@@ -1,12 +1,14 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const shortenRouter = require('./routes/url')
+const redirectRouter = require('./routes/redirect')
 
 
 const app = express();
 dotenv.config();
 
-mongodb.connect(process.env.MONGO_URL, {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true
 }).
     then(console.log("Connected to MongoDB")).
@@ -20,7 +22,8 @@ app.use(express.json());
 
 
 // routes
-
+app.use('/url', shortenRouter);
+app.use('/', redirectRouter);
 
 
 // PORT
